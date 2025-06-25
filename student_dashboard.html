@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a href="#" onclick="showSection('browse-section')">Browse Opportunities</a>
+            <a href="#" onclick="showSection('applications-section')">My Applications</a>
+            <a href="#" onclick="showSection('profile-section')">My Profile</a>
+        </nav>
+
+        <div id="browse-section">
+            <h2>Browse Opportunities</h2>
+            <div id="job-listings-container">
+                <!-- Job listings will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <div id="applications-section" style="display: none;">
+            <h2>My Applications</h2>
+            <div id="my-applications-container">
+                <!-- Application statuses will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <div id="profile-section" style="display: none;">
+            <h2>My Profile</h2>
+            <div id="my-profile-container">
+                <!-- Student profile will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

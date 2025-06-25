@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a href="#" onclick="showEmployerSection('listings-section')">My Listings</a>
+            <a href="#" onclick="showEmployerSection('post-job-section')">Post a Job</a>
+        </nav>
+
+        <div id="listings-section">
+            <h2>My Job Listings</h2>
+            <div id="employer-listings-container">
+                <!-- Employer's job listings will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <div id="post-job-section" style="display: none;">
+            <h2>Post a New Job</h2>
+            <form id="post-job-form">
+                <div class="form-group">
+                    <label for="job-title">Job Title</label>
+                    <input type="text" id="job-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="job-type">Job Type</label>
+                    <select id="job-type">
+                        <option>Gig</option>
+                        <option>Internship</option>
+                        <option>Full-time</option>
+                    </select>
+                </div>
+                 <div class="form-group">
+                    <label for="job-location">Location</label>
+                    <input type="text" id="job-location" placeholder="e.g., Remote, Onsite - City, State" required>
+                </div>
+                <div class="form-group">
+                    <label for="job-skills">Required Skills (comma-separated)</label>
+                    <input type="text" id="job-skills" placeholder="e.g., HTML, CSS, JavaScript" required>
+                </div>
+                <div class="form-group">
+                    <label for="job-pay">Pay/Salary</label>
+                    <input type="text" id="job-pay" placeholder="e.g., $25/hour, $500 project-based" required>
+                </div>
+                 <div class="form-group">
+                    <label for="job-description">Description</label>
+                    <textarea id="job-description" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Listing</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html> 
