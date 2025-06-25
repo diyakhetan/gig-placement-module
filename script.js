@@ -63,8 +63,9 @@ const employerListings = [...jobListings];
 
 document.addEventListener('DOMContentLoaded', function() {
     // Check if we are on the student dashboard page
-    if (document.getElementById('job-listings-container')) {
-        renderJobListings();
+    if (document.getElementById('gigs-listings-container') || document.getElementById('jobs-listings-container')) {
+        renderGigs();
+        renderJobs();
         setupStudentDashboardEventListeners();
     }
 
@@ -75,10 +76,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-function renderJobListings() {
-    const container = document.getElementById('job-listings-container');
+function renderGigs() {
+    const container = document.getElementById('gigs-listings-container');
     container.innerHTML = ''; // Clear existing listings
-    jobListings.forEach(job => {
+    const gigs = jobListings.filter(job => job.type === 'Gig');
+    gigs.forEach(job => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <h3>${job.title}</h3>
+            <p><strong>Company:</strong> ${job.company}</p>
+            <p><strong>Type:</strong> ${job.type} | <strong>Location:</strong> ${job.location}</p>
+            <p><strong>Pay:</strong> ${job.pay}</p>
+            <p><strong>Required Skills:</strong> ${job.requiredSkills.join(', ')}</p>
+            <button class="btn quick-apply-btn" data-job-id="${job.id}">Quick Apply</button>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function renderJobs() {
+    const container = document.getElementById('jobs-listings-container');
+    container.innerHTML = ''; // Clear existing listings
+    const jobs = jobListings.filter(job => job.type !== 'Gig');
+    jobs.forEach(job => {
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
@@ -177,7 +198,7 @@ function viewApplicants(jobId, jobTitle) {
 
 function showSection(sectionId) {
     // Hide all dashboard sections
-    document.querySelectorAll('#browse-section, #applications-section, #profile-section').forEach(section => {
+    document.querySelectorAll('#gigs-section, #jobs-section, #applications-section, #profile-section').forEach(section => {
         section.style.display = 'none';
     });
 
@@ -195,30 +216,33 @@ function showSection(sectionId) {
     }
 }
 
-function setupStudentDashboardEventListeners() {
-     // Event listener for "Quick Apply" buttons
-    document.getElementById('job-listings-container').addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('quick-apply-btn')) {
-            const jobId = parseInt(e.target.getAttribute('data-job-id'));
-            
-            // Check if already applied
-            const hasApplied = myApplications.some(app => app.jobId === jobId);
-            if (hasApplied) {
-                alert('You have already applied for this job.');
-                return;
-            }
-
-            const job = jobListings.find(j => j.id === jobId);
-            if (job) {
-                myApplications.push({
-                    jobId: job.id,
-                    jobTitle: job.title,
-                    status: 'Applied'
-                });
-                alert('Application Submitted!');
-            }
+function handleQuickApply(e) {
+    if (e.target && e.target.classList.contains('quick-apply-btn')) {
+        const jobId = parseInt(e.target.getAttribute('data-job-id'));
+        
+        // Check if already applied
+        const hasApplied = myApplications.some(app => app.jobId === jobId);
+        if (hasApplied) {
+            alert('You have already applied for this job.');
+            return;
         }
-    });
+
+        const job = jobListings.find(j => j.id === jobId);
+        if (job) {
+            myApplications.push({
+                jobId: job.id,
+                jobTitle: job.title,
+                status: 'Applied'
+            });
+            alert('Application Submitted!');
+        }
+    }
+}
+
+function setupStudentDashboardEventListeners() {
+    // Event listener for "Quick Apply" buttons
+    document.getElementById('gigs-listings-container').addEventListener('click', handleQuickApply);
+    document.getElementById('jobs-listings-container').addEventListener('click', handleQuickApply);
 }
 
 function showEmployerSection(sectionId) {

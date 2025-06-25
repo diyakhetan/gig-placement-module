@@ -10,14 +10,22 @@
 <body>
     <div class="container">
         <nav class="navbar">
-            <a href="#" onclick="showSection('browse-section')">Browse Opportunities</a>
+            <a href="#" onclick="showSection('gigs-section')">Gigs</a>
+            <a href="#" onclick="showSection('jobs-section')">Jobs</a>
             <a href="#" onclick="showSection('applications-section')">My Applications</a>
             <a href="#" onclick="showSection('profile-section')">My Profile</a>
         </nav>
 
-        <div id="browse-section">
-            <h2>Browse Opportunities</h2>
-            <div id="job-listings-container">
+        <div id="gigs-section">
+            <h2>Gigs</h2>
+            <div id="gigs-listings-container">
+                <!-- Gig listings will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <div id="jobs-section" style="display: none;">
+            <h2>Jobs</h2>
+            <div id="jobs-listings-container">
                 <!-- Job listings will be dynamically inserted here -->
             </div>
         </div>
